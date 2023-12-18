@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\GenreRepository;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[ORM\Entity(repositoryClass: GenreRepository::class)]
-class Genre
+class Genre extends AbstractController
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -24,6 +26,11 @@ class Genre
     public function __construct()
     {
         $this->movies = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 
     public function getId(): ?int
