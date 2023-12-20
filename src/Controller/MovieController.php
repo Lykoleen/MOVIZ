@@ -7,14 +7,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class PageController extends AbstractController
+class MovieController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
+    #[Route('/movie', name: 'app_movie')]
     public function index(MovieRepository $movieRepository): Response
     {
-        $movies = $movieRepository->findBy([], ['id' => 'DESC'],3);
+        $movies = $movieRepository->findBy([], ['id' => 'DESC']);
 
-        $websiteName = 'Moviz';
-        return $this->render('page/index.html.twig', compact('websiteName', 'movies'));
+        dump($movies);
+
+        return $this->render('movie/index.html.twig', compact(
+            'movies'
+        ));
     }
 }
